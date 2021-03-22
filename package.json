@@ -15,6 +15,9 @@
     "dotenv": "^8.2.0",
     "mongoose": "^5.12.1",
     "puppeteer": "^8.0.0",
-    "uuid": "^8.3.2"
+    "webpack": "^5.27.1"
+  },
+  "devDependencies": {
+    "serverless-plugin-webpack": "^1.5.1"
   }
 }
