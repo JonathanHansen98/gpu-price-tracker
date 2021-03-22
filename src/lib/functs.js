@@ -72,7 +72,8 @@ module.exports.pageQuery = async (pages) => {
 };
 
 module.exports.writeToDb = async (data) => {
-  await mongoose.connect(process.env.MONGO_URI, {
+  const {MONGODB_URI} = await waitForSecret('mongodbConnectionString/gpuData')
+  await mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
