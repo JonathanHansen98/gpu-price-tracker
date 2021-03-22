@@ -2,6 +2,7 @@ const { GPU } = require("../models");
 const sha256 = require("crypto-js/sha256");
 const { querys, gpus } = require("./data");
 const mongoose = require("mongoose");
+const waitForSecret = require("./waitForSecret");
 
 const readPageData = async (puppPage) => {
   return await Promise.all(
@@ -72,7 +73,9 @@ module.exports.pageQuery = async (pages) => {
 };
 
 module.exports.writeToDb = async (data) => {
-  const {MONGODB_URI} = await waitForSecret('mongodbConnectionString/gpuData')
+  const res = await waitForSecret("mongodbConnectionString/gpuData");
+  console.log(res);
+  return;
   await mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
