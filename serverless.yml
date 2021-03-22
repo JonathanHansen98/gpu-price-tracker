@@ -23,10 +23,13 @@ frameworkVersion: '2'
 provider:
   name: aws
   runtime: nodejs12.x
-
+  region: us-east-2
+plugins:
+  - serverless-plugin-webpack
+package:
+  individually: true
 # you can overwrite defaults here
 #  stage: dev
-#  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -58,8 +61,13 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
+  scrape:
     handler: src/handlers/getPrices.handler
+    events:
+      - http:
+          path: /scrape
+          method: post
+      - schedule: rate(1 hour)
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
